@@ -1,0 +1,11 @@
+# Ignore model weights
+*.gguf
+src/models/
+
+# Ignore python cache
+__pycache__/
+*.pyc
+
+# Ignore output files
+*.csv
+eval_data/
