@@ -21,7 +21,7 @@ Operating under strict competition constraints (maximum 9B parameters, 45-60 min
 ### Validation Benchmarks
 
 - **Public Test Accuracy**: **82.29+** on the official competition scoring platform.
-- **Inference Speed**: ~**1.35 to 1.50 seconds per sample** tested on Kaggle dual NVIDIA T4 GPUs (Q8_0 quantization). Perfectly tailored for organizer evaluation hardware (NVIDIA RTX 5060Ti 16GB VRAM, 32GB RAM).
+- **Inference Speed**: ~**9.3 seconds per sample** tested on Kaggle dual NVIDIA T4 GPUs (Q5_K_M quantization). Optimized to leverage NVIDIA RTX 5060Ti 16GB VRAM, 32GB RAM hardware via Q8_0 8-bit inference.
 - **Reliability**: 100% valid output formatting across evaluation sets with zero out-of-memory crashes.
 
 ---
@@ -30,7 +30,7 @@ Operating under strict competition constraints (maximum 9B parameters, 45-60 min
 
 The system is a five-stage Hybrid AI Agent Pipeline executed end-to-end inside a single Python script (`predict.py`):
 
-```
+```text
 [Input: private_test.json]  (/code/private_test.json)
           │
           ▼
@@ -86,8 +86,6 @@ The system is a five-stage Hybrid AI Agent Pipeline executed end-to-end inside a
                    ▼
 [Output: /code/submission.csv + /code/submission_time.csv]
 ```
-
-**Per-question timing** is measured individually using `time.time()` around each pipeline call and dumped to `submission_time.csv` with columns `qid, answer, time`, as required by the official grading specification.
 
 ---
 
