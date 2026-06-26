@@ -175,6 +175,7 @@ The pipeline is packaged into a standalone Docker container adhering strictly to
 - Linux OS or Windows with WSL2 enabled.
 - NVIDIA GPU supporting CUDA 12.2+ (compatible with RTX 5060Ti 16GB VRAM).
 - NVIDIA Container Toolkit and Docker Engine installed.
+- **Model Weights**: You must manually download the model weights before building. Download `Qwen3.5-4B.Q8_0.gguf` from [HuggingFace](https://huggingface.co/Jackrong/Qwen3.5-4B-Claude-4.6-Opus-Reasoning-Distilled-v2-GGUF/resolve/main/Qwen3.5-4B.Q8_0.gguf) and place it inside the `src/models/` directory.
 
 ### Repository Structure (`final/`)
 
