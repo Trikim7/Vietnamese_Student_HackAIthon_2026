@@ -184,7 +184,6 @@ final/
 ├── Dockerfile                  # Official CUDA 12.2 runtime container setup
 ├── inference.sh                # Main execution script (CMD ["bash", "inference.sh"])
 ├── requirements.txt            # Python dependencies
-├── TAI_LIEU_THUYET_MINH.md     # Technical method explanatory report (Vietnamese)
 ├── vsds2026.ipynb              # Original Kaggle research notebook
 └── src/
     ├── predict.py              # Core End-to-End inference pipeline script
