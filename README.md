@@ -97,13 +97,13 @@ The system is a five-stage Hybrid AI Agent Pipeline executed end-to-end inside a
 
 The local knowledge base (`vietnam_kb.jsonl`) contains 495 curated records covering domains where general LLMs typically fail on Vietnamese benchmarks:
 
-| Domain | Sources |
-|---|---|
-| Constitutional & Administrative Law | Official Government Legal Portal (vbpl.vn), Decree 168/2024 on traffic violations |
-| Party History & Marxist-Leninist Theory | Official CPV study materials, Vietnamese Wikipedia |
-| Vietnamese Literature & Folk Proverbs | Literature summaries for grades 9–12, Proverb explanation dictionaries |
-| Economic Geography | Vietnam Statistical Yearbooks, Vietnamese Wikipedia — Geography |
-| Science & Mathematics | Core formulas and concept definitions |
+| Domain                                  | Sources                                                                           |
+| --------------------------------------- | --------------------------------------------------------------------------------- |
+| Constitutional & Administrative Law     | Official Government Legal Portal (vbpl.vn), Decree 168/2024 on traffic violations |
+| Party History & Marxist-Leninist Theory | Official CPV study materials, Vietnamese Wikipedia                                |
+| Vietnamese Literature & Folk Proverbs   | Literature summaries for grades 9–12, Proverb explanation dictionaries            |
+| Economic Geography                      | Vietnam Statistical Yearbooks, Vietnamese Wikipedia — Geography                   |
+| Science & Mathematics                   | Core formulas and concept definitions                                             |
 
 Each record follows this schema:
 
@@ -143,11 +143,11 @@ The top-10 BM25 results are then re-ranked by counting how many `choice` strings
 
 This pipeline uses **BM25 lexical indexing only** — no vector database or embedding model is required. All resources are initialized automatically at container startup:
 
-| Resource | Location in Container | Initialization Method |
-|---|---|---|
-| GGUF Language Model | `/code/src/models/Qwen3.5-4B.Q8_0.gguf` | Loaded into GPU VRAM via `llama-cpp-python` at script start (~5s) |
-| BM25 Knowledge Index | Built in-memory from `/code/src/vietnam_kb.jsonl` | Re-indexed every run using `rank_bm25.BM25Okapi` (~2s) |
-| Test Data | `/code/private_test.json` | Mounted by organizer at container run time |
+| Resource             | Location in Container                            | Initialization Method                                            |
+| -------------------- | ------------------------------------------------ | ---------------------------------------------------------------- |
+| GGUF Language Model  | `/code/src/models/Qwen3.5-4B.Q8_0.gguf`          | Loaded into GPU VRAM via`llama-cpp-python` at script start (~5s) |
+| BM25 Knowledge Index | Built in-memory from`/code/src/vietnam_kb.jsonl` | Re-indexed every run using`rank_bm25.BM25Okapi` (~2s)            |
+| Test Data            | `/code/private_test.json`                        | Mounted by organizer at container run time                       |
 
 **No pre-build or pre-download step is needed.** The Dockerfile already copies `src/models/` and `src/vietnam_kb.jsonl` into the image at build time. When the container starts, `inference.sh` triggers `src/predict.py` which initializes all resources sequentially before entering the inference loop.
 
@@ -218,7 +218,7 @@ sudo docker run --gpus all --ipc=host \
 
 **Step 4: Retrieve Output Files**
 
-When inference completes (~45–60 minutes for 2000 questions on RTX 5060Ti), two submission files are written:
+When inference completes, two submission files are written:
 
 1. `submission.csv` — Columns: `qid`, `answer`
 2. `submission_time.csv` — Columns: `qid`, `answer`, `time` (individual wall-clock seconds per sample)
