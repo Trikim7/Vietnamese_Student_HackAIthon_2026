@@ -171,7 +171,7 @@ The pipeline is packaged into a standalone Docker container adhering strictly to
 ### Prerequisites
 
 - Linux OS or Windows with WSL2 enabled.
-- NVIDIA GPU supporting CUDA 12.2+ (compatible with RTX 5060Ti 16GB VRAM).
+- NVIDIA GPU supporting CUDA 12.2+ .
 - NVIDIA Container Toolkit and Docker Engine installed.
 - **Model Weights**: You must manually download the model weights before building. Download `Qwen3.5-4B.Q8_0.gguf` from [HuggingFace](https://huggingface.co/Jackrong/Qwen3.5-4B-Claude-4.6-Opus-Reasoning-Distilled-v2-GGUF/resolve/main/Qwen3.5-4B.Q8_0.gguf) and place it inside the `src/models/` directory.
 
@@ -207,18 +207,37 @@ cp /path/to/private_test.json ./eval_data/private_test.json
 
 **Step 3: Run Inference Container**
 
+On Linux / Bash:
+
 ```bash
 sudo docker run --gpus all --ipc=host \
   -v $(pwd)/eval_data:/app/data \
   team_submission
 ```
 
-**Step 4: Retrieve Output Files**
+On Windows PowerShell:
 
-When inference completes, two submission files are written:
+```powershell
+docker run --gpus all --ipc=host -v ${PWD}/eval_data:/app/data team_submission
+```
 
-1. `submission.csv` — Columns: `qid`, `answer`
-2. `submission_time.csv` — Columns: `qid`, `answer`, `time` (individual wall-clock seconds per sample)
+**Step 4: Retrieve & View Output Files**
+
+When inference completes (~2-15s per sample depending on reasoning complexity), the pipeline exports two final benchmark files:
+
+1. `submission.csv` — Required Track C format (Columns: `qid`, `answer`)
+2. `submission_time.csv` — Benchmark log (Columns: `qid`, `answer`, `time`)
+
+**How to find your outputs:**
+
+- **Standard Method (via Volume `-v`):** Because `./eval_data` was mounted to `/app/data`, both CSV files appear automatically inside your local `./eval_data/` directory on your host hard drive!
+- **Manual Method (via `docker cp` without `-v`):** If you ran the container directly without mounting a volume, extract the files from the stopped container:
+  ```bash
+  # Copy directly from the last exited container to current folder
+  CONTAINER_ID=$(docker ps -a -q -n 1)
+  docker cp $CONTAINER_ID:/code/submission.csv ./submission.csv
+  docker cp $CONTAINER_ID:/code/submission_time.csv ./submission_time.csv
+  ```
 
 ### Local Execution via Python (Optional)
 
