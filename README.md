@@ -1,4 +1,4 @@
-# Vietnam Supreme Data Science (VSDS) 2026 - Track C Solution
+# Vietnamese Student HackAIthon (VSDS) 2026 - Track C Solution
 
 Official containerized inference pipeline submitted for **Track C (Innovator)** of the **Vietnamese Student HackAIthon 2026**.
 
