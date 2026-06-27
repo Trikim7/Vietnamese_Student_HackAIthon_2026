@@ -10,7 +10,7 @@ Adhering to the core theme of **Track C (Innovator)** in the _Vietnamese Student
 
 A key challenge when deploying general LLMs on Vietnamese multiple-choice evaluations is the "localization gap"—international models frequently hallucinate details regarding national legal decrees, literature, geography, and folk proverbs. To empower our multi-tasking AI Agent, **we curated and enriched a specialized dataset designed specifically for Vietnam** (`vietnam_kb.jsonl`). This tailored dataset injects high-precision local facts into our retrieval engine.
 
-Operating under strict competition constraints (maximum 9B parameters, 45-60 minute execution cap for 2000 samples), our solution implements a lightweight **Hybrid RAG Pipeline** balancing reasoning depth with inference speed.
+Operating under strict competition constraints (maximum 5B parameters, 2000 samples in private test), our solution implements a lightweight **Hybrid RAG Pipeline** balancing reasoning depth with inference speed.
 
 ### Core Technology Stack
 
