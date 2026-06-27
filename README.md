@@ -28,7 +28,12 @@ Operating under strict competition constraints (maximum 9B parameters, 45-60 min
 
 ## 2. Pipeline Flow
 
+![VSDS 2026 Track C Innovator Pipeline Flow Diagram](./pipeline_flow.png)
+
 The system is a five-stage Hybrid AI Agent Pipeline executed end-to-end inside a single Python script (`predict.py`):
+
+<details>
+<summary>🔍 <b>Click to expand: Textual Pipeline Trace (Terminal / ASCII View)</b></summary>
 
 ```text
 [Input: private_test.json]  (/code/private_test.json)
@@ -86,6 +91,8 @@ The system is a five-stage Hybrid AI Agent Pipeline executed end-to-end inside a
                    ▼
 [Output: /code/submission.csv + /code/submission_time.csv]
 ```
+
+</details>
 
 ---
 
