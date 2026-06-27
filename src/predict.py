@@ -30,9 +30,15 @@ PROFILES = {
 }
 
 BASE_DIR = Path(__file__).resolve().parent
-MODEL_PATH = BASE_DIR / "models" / "Qwen3.5-4B.Q8_0.gguf"
-if not MODEL_PATH.exists():
-    MODEL_PATH = Path("/agent_src/src/models/Qwen3.5-4B.Q8_0.gguf")
+models_dir = BASE_DIR / "models"
+gguf_files = list(models_dir.glob("*.gguf"))
+if not gguf_files:
+    gguf_files = list(Path("/agent_src/src/models").glob("*.gguf"))
+
+if not gguf_files:
+    MODEL_PATH = models_dir / "Qwen3.5-4B.Q8_0.gguf"
+else:
+    MODEL_PATH = gguf_files[0]
 
 KB_PATH = BASE_DIR / "vietnam_kb.jsonl"
 if not KB_PATH.exists():
