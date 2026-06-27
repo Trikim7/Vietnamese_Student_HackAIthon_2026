@@ -254,9 +254,18 @@ pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-c
 bash inference.sh
 ```
 
-### Docker Hub Deployment
+### Docker Hub Deployment & Official Link
+
+- **Official Docker Hub Repository:** [https://hub.docker.com/r/trikimz/team_submission](https://hub.docker.com/r/trikimz/team_submission)
+- **Pull Command for Judges:**
+  ```bash
+  sudo docker pull trikimz/team_submission:latest
+  ```
+
+To run directly from Docker Hub:
 
 ```bash
-sudo docker tag team_submission <your_dockerhub_username>/team_submission:latest
-sudo docker push <your_dockerhub_username>/team_submission:latest
+sudo docker run --gpus all --ipc=host \
+  -v $(pwd)/eval_data:/app/data \
+  trikimz/team_submission:latest
 ```
